@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -17,21 +16,9 @@
 body {
   margin: 0;
   padding: 0;
-  position: relative;
   min-height: 100vh;
-}
 
-body::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url('https://storage.123fakturera.se/public/wallpapers/sverige43.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  z-index: -1;
-  will-change: transform;
+  background: #000 
+    url('https://storage.123fakturera.se/public/wallpapers/sverige43.jpg')
+    center / cover no-repeat fixed;
 }

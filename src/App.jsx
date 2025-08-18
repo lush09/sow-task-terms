@@ -105,7 +105,12 @@ function App() {
       <main className="px-4 max-w-4xl mx-auto">
         <div className="flex flex-col items-center">
           <h1 className="text-3xl text-gray-100 font-bold mb-8">Terms</h1>
-          
+          <button 
+            className="bg-green-600 hover:bg-green-800 text-white font-medium py-4 px-10 mb-10 rounded-full transition-colors"
+            onClick={() => window.history.back()}
+          >
+            Close and Go Back
+          </button>
           <div className="terms-card text-center bg-white rounded-3xl shadow-md p-10 max-w-3xl w-full mb-8 min-h-[300px]">
             {loading ? (
               <div className="flex justify-center items-center h-full">
