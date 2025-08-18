@@ -13,12 +13,17 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-body {
+html, body {
+  height: 100%;
   margin: 0;
-  padding: 0;
-  min-height: 100vh;
-
-  background: #000 
-    url('https://storage.123fakturera.se/public/wallpapers/sverige43.jpg')
-    center / cover no-repeat fixed;
 }
+
+html {
+  background-image: url('https://storage.123fakturera.se/public/wallpapers/sverige43.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+body { background: transparent; }
