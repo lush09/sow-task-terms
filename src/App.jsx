@@ -79,10 +79,11 @@ function App() {
 
   return (
     <div 
-      className="min-h-screen text-gray-100 bg-cover bg-center bg-no-repeat"
+      className="min-h-screen text-gray-100 bg-center bg-no-repeat"
       style={{
         backgroundImage: 'url(https://storage.123fakturera.se/public/wallpapers/sverige43.jpg)',
-        minHeight: '100vh'
+        minHeight: '100vh',
+        backgroundSize: '100% 100%'
       }}
     >
       <Header onLanguageChange={handleLanguageChange} />
