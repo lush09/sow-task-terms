@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Header from './components/Header';
 import { languageApi } from './services/api';
-import backgroundImage from '../assets/sverige43.jpg'; // Add this import
 
 function App() {
   const [terms, setTerms] = useState({ swedish: '', english: '' });
@@ -90,7 +89,7 @@ function App() {
         <div 
           className="absolute top-0 left-0 w-full h-full bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: `url(${backgroundImage})`
+            backgroundImage: 'url(https://storage.123fakturera.se/public/wallpapers/sverige43.jpg)'
           }}
         />
       </div>
