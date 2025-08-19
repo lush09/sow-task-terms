@@ -83,7 +83,7 @@ function App() {
       style={{
         backgroundImage: 'url(https://storage.123fakturera.se/public/wallpapers/sverige43.jpg)',
         minHeight: '100vh',
-        backgroundSize: '100% 100%'
+        backgroundSize: 'contain'
       }}
     >
       <Header onLanguageChange={handleLanguageChange} />
