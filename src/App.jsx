@@ -85,7 +85,7 @@ function App() {
       <Parallax
         bgImage="https://storage.123fakturera.se/public/wallpapers/sverige43.jpg"
         strength={200}
-        bgImageStyle={{ objectFit: 'cover' }}
+        bgImageStyle={{ objectFit: 'fixed' }}
       >
         <main className="px-4 max-w-4xl mx-auto">
           <div className="flex flex-col items-center py-20">
