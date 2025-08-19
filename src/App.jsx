@@ -8,20 +8,23 @@ function App() {
   const [error, setError] = useState(null);
   const [selectedLanguage, setSelectedLanguage] = useState('English');
 
-  // Fetch terms from languages/1 endpoint
+  // Parallax scroll effect
+  useEffect(() => {
+    const handleScroll = () => {
+      const offset = window.scrollY * 0.4; // adjust multiplier for effect strength
+      document.documentElement.style.setProperty('--parallax-offset', `-${offset}px`);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Fetch terms from API
   useEffect(() => {
     const fetchTerms = async () => {
       try {
         const response = await languageApi.getLanguageById(1);
-        console.log('API Response:', response);
         if (response.success && response.data) {
-          console.log('Swedish terms:', response.data.swedish);
-          console.log('English terms:', response.data.english);
-          // Check if the link is in the content
-          const hasLink = response.data.english?.includes('target="_blank"') || 
-                         response.data.swedish?.includes('target="_blank"');
-          console.log('Contains target="_blank" link:', hasLink);
-          
           setTerms({
             swedish: response.data.swedish || '',
             english: response.data.english || ''
@@ -30,7 +33,6 @@ function App() {
           setError(response.message || 'Failed to load terms');
         }
       } catch (err) {
-        console.error('Error:', err);
         setError(err.message || 'Failed to connect to the API');
       } finally {
         setLoading(false);
@@ -40,12 +42,10 @@ function App() {
     fetchTerms();
   }, []);
 
-  // Handle language change from header
   const handleLanguageChange = (language) => {
     setSelectedLanguage(language);
   };
 
-  // Get the current terms based on selected language
   const getCurrentTerms = () => {
     if (selectedLanguage === 'Svenska') {
       return terms.swedish || 'PUT TERMS HERE (Swedish)';
@@ -53,33 +53,23 @@ function App() {
       return terms.english || 'PUT TERMS HERE (English)';
     }
   };
-  
-  // Function to safely process HTML content
+
   const processHtmlContent = (html) => {
     if (!html) return '';
-    
-    // Process all anchor tags to ensure proper target and rel attributes
     let processedHtml = html.replace(/<a\s+([^>]*)>/gi, (match, attrs) => {
-      // Clean up the attributes string
       let cleanAttrs = attrs.trim();
-      
-      // Check if target attribute exists
       const hasTarget = /target\s*=\s*["']([^"']*)["']/i.test(cleanAttrs);
       const hasRel = /rel\s*=\s*["']([^"']*)["']/i.test(cleanAttrs);
-      
+
       if (!hasTarget) {
-        // No target attribute, add target="_blank"
         cleanAttrs += ' target="_blank"';
       } else {
-        // Replace empty target or normalize existing target
         cleanAttrs = cleanAttrs.replace(/target\s*=\s*["']["']/i, 'target="_blank"');
       }
-      
+
       if (!hasRel) {
-        // No rel attribute, add rel="noopener noreferrer"
         cleanAttrs += ' rel="noopener noreferrer"';
       } else {
-        // Ensure rel includes noopener noreferrer
         cleanAttrs = cleanAttrs.replace(/rel\s*=\s*["']([^"']*)["']/i, (relMatch, relValue) => {
           const relValues = relValue.split(/\s+/).filter(Boolean);
           if (!relValues.includes('noopener')) relValues.push('noopener');
@@ -87,14 +77,13 @@ function App() {
           return `rel="${relValues.join(' ')}"`;
         });
       }
-      
+
       return `<a ${cleanAttrs}>`;
     });
-    
+
     return processedHtml;
   };
-  
-  // Function to create markup for HTML content
+
   const createMarkup = (htmlContent) => {
     return { __html: processHtmlContent(htmlContent) };
   };

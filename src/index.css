@@ -19,14 +19,29 @@ html, body {
   padding: 0;
 }
 
-html {
-  background-image: url('https://storage.123fakturera.se/public/wallpapers/sverige43.jpg');
-  background-size: cover;          
-  background-position: top center; 
-  background-repeat: no-repeat; 
+/* background parallax layer */
+#root {
+  position: relative;
+  overflow-x: hidden;
 }
 
-body {
-  background: transparent;
-  min-height: 100vh;
+#root::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 120%; /* bigger than viewport to allow movement */
+  background-image: url('https://storage.123fakturera.se/public/wallpapers/sverige43.jpg');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  transform: translateY(var(--parallax-offset, 0px));
+  will-change: transform;
+  z-index: 0;
+}
+
+#root > * {
+  position: relative;
+  z-index: 1;
 }
