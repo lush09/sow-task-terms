@@ -21,9 +21,9 @@ html, body {
 
 html {
   background-image: url('https://storage.123fakturera.se/public/wallpapers/sverige43.jpg');
-  background-size: contain;    
-  background-position: center top; 
-  background-repeat: no-repeat;     
+  background-size: cover;          
+  background-position: top center; 
+  background-repeat: no-repeat; 
 }
 
 body {
