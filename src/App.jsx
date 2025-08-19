@@ -1,22 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import Header from './components/Header';
 import { languageApi } from './services/api';
+import { Parallax } from 'react-parallax';
 
 function App() {
   const [terms, setTerms] = useState({ swedish: '', english: '' });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedLanguage, setSelectedLanguage] = useState('English');
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const offset = window.scrollY * 0.4;
-      document.documentElement.style.setProperty('--parallax-offset', `-${offset}px`);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   // Fetch terms from API
   useEffect(() => {
@@ -88,40 +79,49 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen text-gray-100">
       <Header onLanguageChange={handleLanguageChange} />
-      <main className="px-4 max-w-4xl mx-auto">
-        <div className="flex flex-col items-center">
-          <h1 className="text-3xl text-gray-100 font-bold mb-8">Terms</h1>
-          <button 
-            className="bg-green-600 hover:bg-green-800 text-white font-medium py-4 px-10 mb-10 rounded-full transition-colors"
-            onClick={() => window.history.back()}
-          >
-            Close and Go Back
-          </button>
-          <div className="terms-card text-center bg-white rounded-3xl shadow-md p-10 max-w-3xl w-full mb-8 min-h-[300px]">
-            {loading ? (
-              <div className="flex justify-center items-center h-full">
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
-              </div>
-            ) : error ? (
-              <div className="text-red-500 text-center">{error}</div>
-            ) : (
-              <div 
-                className="prose max-w-none text-gray-600 [&_a]:text-blue-600 [&_a]:font-semibold [&_a:hover]:text-blue-800"
-                dangerouslySetInnerHTML={createMarkup(getCurrentTerms())}
-              />
-            )}
+
+      <Parallax
+        bgImage="https://storage.123fakturera.se/public/wallpapers/sverige43.jpg"
+        strength={200}
+        bgImageStyle={{ objectFit: 'cover' }}
+      >
+        <main className="px-4 max-w-4xl mx-auto">
+          <div className="flex flex-col items-center py-20">
+            <h1 className="text-3xl font-bold mb-8">Terms</h1>
+
+            <button 
+              className="bg-green-600 hover:bg-green-800 text-white font-medium py-4 px-10 mb-10 rounded-full transition-colors"
+              onClick={() => window.history.back()}
+            >
+              Close and Go Back
+            </button>
+
+            <div className="terms-card text-center bg-white rounded-3xl shadow-md p-10 max-w-3xl w-full mb-8 min-h-[300px]">
+              {loading ? (
+                <div className="flex justify-center items-center h-full">
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+                </div>
+              ) : error ? (
+                <div className="text-red-500 text-center">{error}</div>
+              ) : (
+                <div 
+                  className="prose max-w-none text-gray-600 [&_a]:text-blue-600 [&_a]:font-semibold [&_a:hover]:text-blue-800"
+                  dangerouslySetInnerHTML={createMarkup(getCurrentTerms())}
+                />
+              )}
+            </div>
+            
+            <button 
+              className="bg-green-600 hover:bg-green-800 text-white font-medium py-4 px-10 mb-10 rounded-full transition-colors"
+              onClick={() => window.history.back()}
+            >
+              Close and Go Back
+            </button>
           </div>
-          
-          <button 
-            className="bg-green-600 hover:bg-green-800 text-white font-medium py-4 px-10 mb-10 rounded-full transition-colors"
-            onClick={() => window.history.back()}
-          >
-            Close and Go Back
-          </button>
-        </div>
-      </main>
+        </main>
+      </Parallax>
     </div>
   );
 }
