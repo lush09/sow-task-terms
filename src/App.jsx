@@ -8,10 +8,9 @@ function App() {
   const [error, setError] = useState(null);
   const [selectedLanguage, setSelectedLanguage] = useState('English');
 
-  // Parallax scroll effect
   useEffect(() => {
     const handleScroll = () => {
-      const offset = window.scrollY * 0.4; // adjust multiplier for effect strength
+      const offset = window.scrollY * 0.4;
       document.documentElement.style.setProperty('--parallax-offset', `-${offset}px`);
     };
 

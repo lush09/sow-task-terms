@@ -31,7 +31,7 @@ html, body {
   top: 0;
   left: 0;
   right: 0;
-  height: 120%; /* bigger than viewport to allow movement */
+  height: 100%; /* bigger than viewport to allow movement */
   background-image: url('https://storage.123fakturera.se/public/wallpapers/sverige43.jpg');
   background-size: cover;
   background-position: center top;
