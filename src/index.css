@@ -16,15 +16,27 @@
 html, body {
   height: 100%;
   margin: 0;
-  overscroll-behavior-y: none; 
+  padding: 0;
 }
 
-html {
+#root {
+  isolation: isolate;
+}
+
+#root::before {
+  content: '';
+  position: fixed;
+  inset: 0; 
   background-image: url('https://storage.123fakturera.se/public/wallpapers/sverige43.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-attachment: fixed;
+  z-index: 0; 
+  transform: translateZ(0); 
+  will-change: transform;   
 }
 
-body { background: transparent; }
+#root > * {
+  position: relative;
+  z-index: 1;
+}
