@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Header from './components/Header';
 import { languageApi } from './services/api';
+import backgroundImage from '../assets/sverige43.jpg'; // Add this import
 
 function App() {
   const [terms, setTerms] = useState({ swedish: '', english: '' });
@@ -78,51 +79,61 @@ function App() {
   };
 
   return (
-    <div 
-      className="min-h-screen text-gray-100 bg-center bg-no-repeat"
-      style={{
-        backgroundImage: 'url(https://storage.123fakturera.se/public/wallpapers/sverige43.jpg)',
-        minHeight: '100vh',
-        backgroundSize: 'contain'
-      }}
-    >
-      <Header onLanguageChange={handleLanguageChange} />
+    <>
+      {/* Fixed background div */}
+      <div 
+        className="fixed top-0 left-0 w-full h-screen -z-10"
+        style={{
+          transform: 'scale(1.0)'
+        }}
+      >
+        <div 
+          className="absolute top-0 left-0 w-full h-full bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: `url(${backgroundImage})`
+          }}
+        />
+      </div>
 
-      <main className="px-4 max-w-4xl mx-auto">
-        <div className="flex flex-col items-center py-20">
-          <h1 className="text-3xl font-bold mb-8">Terms</h1>
+      <div className="min-h-screen text-gray-100">
+        <Header onLanguageChange={handleLanguageChange} />
 
-          <button 
-            className="bg-green-600 hover:bg-green-800 text-white font-medium py-4 px-10 mb-10 rounded-full transition-colors"
-            onClick={() => window.history.back()}
-          >
-            Close and Go Back
-          </button>
+        <main className="px-4 max-w-4xl mx-auto">
+          <div className="flex flex-col items-center py-20">
+            <h1 className="text-3xl font-bold mb-8">Terms</h1>
 
-          <div className="terms-card text-center bg-white rounded-3xl shadow-md p-10 max-w-3xl w-full mb-8 min-h-[300px]">
-            {loading ? (
-              <div className="flex justify-center items-center h-full">
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
-              </div>
-            ) : error ? (
-              <div className="text-red-500 text-center">{error}</div>
-            ) : (
-              <div 
-                className="prose max-w-none text-gray-600 [&_a]:text-blue-600 [&_a]:font-semibold [&_a:hover]:text-blue-800"
-                dangerouslySetInnerHTML={createMarkup(getCurrentTerms())}
-              />
-            )}
+            <button 
+              className="bg-green-600 hover:bg-green-800 text-white font-medium py-4 px-10 mb-10 rounded-full transition-colors"
+              onClick={() => window.history.back()}
+            >
+              Close and Go Back
+            </button>
+
+            <div className="terms-card text-center bg-white rounded-3xl shadow-md p-10 max-w-3xl w-full mb-8 min-h-[300px]">
+              {loading ? (
+                <div className="flex justify-center items-center h-full">
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+                </div>
+              ) : error ? (
+                <div className="text-red-500 text-center">{error}</div>
+              ) : (
+                <div 
+                  className="prose max-w-none text-gray-600 [&_a]:text-blue-600 [&_a]:font-semibold [&_a:hover]:text-blue-800"
+                  dangerouslySetInnerHTML={createMarkup(getCurrentTerms())}
+                />
+              )}
+            </div>
+            
+            <button 
+              className="bg-green-600 hover:bg-green-800 text-white font-medium py-4 px-10 mb-10 rounded-full transition-colors"
+              onClick={() => window.history.back()}
+            >
+              Close and Go Back
+            </button>
           </div>
-          
-          <button 
-            className="bg-green-600 hover:bg-green-800 text-white font-medium py-4 px-10 mb-10 rounded-full transition-colors"
-            onClick={() => window.history.back()}
-          >
-            Close and Go Back
-          </button>
-        </div>
-      </main>
-    </div>
+        </main>
+      </div>
+    </>
   );
 }
 
