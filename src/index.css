@@ -19,24 +19,14 @@ html, body {
   padding: 0;
 }
 
-#root {
-  isolation: isolate;
-}
-
-#root::before {
-  content: '';
-  position: fixed;
-  inset: 0; 
+html {
   background-image: url('https://storage.123fakturera.se/public/wallpapers/sverige43.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  z-index: 0; 
-  transform: translateZ(0); 
-  will-change: transform;   
+  background-size: contain;    
+  background-position: center top; 
+  background-repeat: no-repeat;     
 }
 
-#root > * {
-  position: relative;
-  z-index: 1;
+body {
+  background: transparent;
+  min-height: 100vh;
 }
