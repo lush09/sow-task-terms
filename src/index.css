@@ -13,9 +13,19 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-html, body {
+html {
   height: 100%;
   margin: 0;
   padding: 0;
-  background: #000; /* fallback only */
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: #000;
+}
+
+#root {
+  min-height: 100vh;
 }
